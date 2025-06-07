@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>J-event - Détail du produit</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <a href="index.html" class="logo">J-event</a>
+
+    <nav>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="products.html">Événements</a></li>
+        <li><a href="cart.html">Panier</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- PAGE PRODUIT -->
+  <main>
+    <div class="product-detail">
+      <div class="product-image">
+        <img src="images/riz.jpg" alt="Riz parfumé 5kg">
+      </div>
+      <div class="product-info">
+        <h1>Riz parfumé 5kg</h1>
+        <p class="price">5 000 FCFA</p>
+        <p>
+          Riz parfumé de qualité supérieure, idéal pour vos repas quotidiens. Disponible en sac de 5kg.
+        </p>
+        <button class="btn">Ajouter au panier</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2025 J-event. Tous droits réservés.</p>
+  </footer>
+<div id="notif" class="notif">✅ Produit ajouté au panier</div>
+
+</body>
+</html>
+<script src="script.js"></script>
+<script>
+  document.querySelector('.btn').addEventListener('click', () => {
+    ajouterAuPanier({
+      nom: "Riz parfumé 5kg",
+      prix: 5000
+    });
+  });
+</script>
