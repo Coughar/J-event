@@ -370,3 +370,67 @@ textarea {
 .footer-links a:hover {
   color: #fff;
 }
+/* Menu mobile */
+.menu-icon {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: white;
+}
+
+#menu-toggle {
+  display: none;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #111;
+  color: white;
+  padding: 15px 20px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 999;
+}
+
+.nav-links ul {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .menu-icon {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background-color: #111;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+  }
+
+  .nav-links ul {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  #menu-toggle:checked + .menu-icon + .nav-links {
+    display: block;
+  }
+}
