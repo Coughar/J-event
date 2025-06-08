@@ -73,32 +73,29 @@
     const telephone = document.getElementById("telephone").value;
     const adresse = document.getElementById("adresse").value;
 
-    // ✅ On récupère le panier AVANT de le vider
     const panier = JSON.parse(localStorage.getItem('panier')) || [];
 
-    let message = `Bonjour, je souhaite passer une commande via J-event :%0A%0A`;
+    let message = `Bonjour, je souhaite passer une commande via J-event :\n\n`;
 
     if (panier.length === 0) {
-      message += `⚠️ Aucun produit sélectionné.%0A`;
+      message += `⚠️ Aucun produit sélectionné.\n`;
     } else {
       panier.forEach(item => {
-        message += `- ${item.nom} x${item.quantite} (${item.prix * item.quantite} FCFA)%0A`;
+        message += `- ${item.nom} x${item.quantite} (${item.prix * item.quantite} FCFA)\n`;
       });
     }
 
-    message += `%0A👤 Nom : ${nom}%0A📞 Téléphone : ${telephone}%0A📍 Adresse : ${adresse}`;
+    message += `\n👤 Nom : ${nom}\n📞 Téléphone : ${telephone}\n📍 Adresse : ${adresse}`;
 
-    // ✅ Numéro WhatsApp (remplace-le si besoin)
+    // Numéro WhatsApp au format international sans "+"
     const numeroWhatsApp = "24162692782";
-    const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURI(message)}`;
+    const lien = "https://wa.me/" + numeroWhatsApp + "?text=" + encodeURIComponent(message);
 
-    // ✅ On vide le panier APRÈS avoir généré le message
     localStorage.removeItem('panier');
-
-    // ✅ Redirection vers WhatsApp
-    window.location.href = url;
+    window.location.href = lien;
   });
 </script>
+
 
 <div id="notif" class="notif">✅ Produit ajouté au panier</div>
 
