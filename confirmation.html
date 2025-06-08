@@ -65,7 +65,6 @@
   </script>
 <script>
   const form = document.getElementById("livraison-form");
-  const confirmation = document.getElementById("confirmation-message");
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -74,22 +73,29 @@
     const telephone = document.getElementById("telephone").value;
     const adresse = document.getElementById("adresse").value;
 
+    // ✅ On récupère le panier AVANT de le vider
     const panier = JSON.parse(localStorage.getItem('panier')) || [];
 
     let message = `Bonjour, je souhaite passer une commande via J-event :%0A%0A`;
 
-    panier.forEach(item => {
-      message += `- ${item.nom} x${item.quantite} (${item.prix * item.quantite} FCFA)%0A`;
-    });
+    if (panier.length === 0) {
+      message += `⚠️ Aucun produit sélectionné.%0A`;
+    } else {
+      panier.forEach(item => {
+        message += `- ${item.nom} x${item.quantite} (${item.prix * item.quantite} FCFA)%0A`;
+      });
+    }
 
     message += `%0A👤 Nom : ${nom}%0A📞 Téléphone : ${telephone}%0A📍 Adresse : ${adresse}`;
 
-    // Numéro du restaurant au format international, exemple : +241xxxxxxxx
-    const numeroWhatsApp = "241062692782"; // Remplace par le numéro du restaurant
-    const url = `https://wa.me/${numeroWhatsApp}?text=${message}`;
+    // ✅ Numéro WhatsApp (remplace-le si besoin)
+    const numeroWhatsApp = "24162692782";
+    const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURI(message)}`;
 
-    // Vider le panier et rediriger
+    // ✅ On vide le panier APRÈS avoir généré le message
     localStorage.removeItem('panier');
+
+    // ✅ Redirection vers WhatsApp
     window.location.href = url;
   });
 </script>
