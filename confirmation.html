@@ -1,69 +1,63 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>J-event - Confirmation</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Confirmation - J-event</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <a href="index.html" class="logo">J-event</a>
+ <header>
+  <a href="index.html" class="logo">J-event</a>
 
-    <nav>
-      <ul>
-        <li><a href="index.html">Accueil</a></li>
-        <li><a href="products.html">Événements</a></li>
-        <li><a href="cart.html">Panier</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
+  <!-- MENU BURGER MOBILE -->
+  <input type="checkbox" id="menu-toggle">
+  <label for="menu-toggle" class="menu-icon">&#9776;</label>
 
-  <!-- MESSAGE DE CONFIRMATION -->
-  <main>
-  <section class="confirmation">
-    <h1>📝 Informations de livraison</h1>
-    <p>Veuillez remplir le formulaire ci-dessous pour finaliser votre commande.</p>
+  <!-- MENU NAVIGATION -->
+  <nav class="nav-links">
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="products.html">Événements</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
 
+  <!-- PANIER FIXE À DROITE -->
+  <a href="cart.html" class="cart-icon">
+    🛒 <span id="cart-count">0</span>
+  </a>
+</header>
+
+
+  <main class="confirmation">
+    <h1>Validez votre commande</h1>
     <form id="livraison-form">
       <div class="form-group">
         <label for="nom">Nom complet :</label>
-        <input type="text" id="nom" name="nom" required>
+        <input type="text" id="nom" required>
       </div>
 
       <div class="form-group">
-        <label for="telephone">Numéro de téléphone :</label>
-        <input type="tel" id="telephone" name="telephone" required>
+        <label for="telephone">Téléphone :</label>
+        <input type="tel" id="telephone" required>
       </div>
 
       <div class="form-group">
-        <label for="adresse">Adresse de livraison :</label>
-        <textarea id="adresse" name="adresse" required></textarea>
+        <label for="adresse">Adresse :</label>
+        <textarea id="adresse" required></textarea>
       </div>
 
-      <button type="submit" class="btn">Envoyer la commande</button>
+      <button type="submit" class="btn">Envoyer la commande via WhatsApp</button>
     </form>
+  </main>
 
-    <div id="confirmation-message" style="display:none; margin-top:20px;">
-      ✅ Merci ! Votre commande a bien été transmise.
-    </div>
-  </section>
-</main>
-
-
-  <!-- FOOTER -->
   <footer>
     <p>&copy; 2025 J-event. Tous droits réservés.</p>
   </footer>
 
-  <script>
-    // Optionnel : vider le panier après commande
-    localStorage.removeItem('panier');
-  </script>
-<script>
+ <script>
   const form = document.getElementById("livraison-form");
 
   form.addEventListener("submit", function (e) {
@@ -73,8 +67,10 @@
     const telephone = document.getElementById("telephone").value;
     const adresse = document.getElementById("adresse").value;
 
+    // 1. On récupère d'abord le panier
     const panier = JSON.parse(localStorage.getItem('panier')) || [];
 
+    // 2. On construit le message
     let message = `Bonjour, je souhaite passer une commande via J-event :\n\n`;
 
     if (panier.length === 0) {
@@ -87,17 +83,20 @@
 
     message += `\n👤 Nom : ${nom}\n📞 Téléphone : ${telephone}\n📍 Adresse : ${adresse}`;
 
-    // Numéro WhatsApp au format international sans "+"
+    // 3. On construit le lien WhatsApp (encode)
     const numeroWhatsApp = "24162692782";
     const lien = "https://wa.me/" + numeroWhatsApp + "?text=" + encodeURIComponent(message);
 
-    localStorage.removeItem('panier');
+    // 4. On redirige d'abord, puis on vide le panier juste après un petit délai
     window.location.href = lien;
+
+    // ✅ On vide le panier un peu après pour laisser WhatsApp s’ouvrir tranquillement
+    setTimeout(() => {
+      localStorage.removeItem('panier');
+    }, 3000); // 3 secondes
   });
 </script>
 
-
-<div id="notif" class="notif">✅ Produit ajouté au panier</div>
 
 </body>
 </html>
