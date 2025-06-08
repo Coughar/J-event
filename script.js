@@ -86,16 +86,9 @@ if (window.location.pathname.includes("cart.html")) {
 function mettreAJourIconePanier() {
   const span = document.getElementById("cart-count");
   if (!span) return;
-
-  let totalArticles = 0;
-  panier.forEach(item => {
-    totalArticles += item.quantite;
-  });
-
+  let totalArticles = panier.reduce((s, a) => s + a.quantite, 0);
   span.textContent = totalArticles;
 }
-if (document.readyState !== "loading") {
-  mettreAJourIconePanier();
-} else {
-  document.addEventListener("DOMContentLoaded", mettreAJourIconePanier);
-}
+
+if (document.readyState !== "loading") mettreAJourIconePanier();
+else document.addEventListener("DOMContentLoaded", mettreAJourIconePanier);

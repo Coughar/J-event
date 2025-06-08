@@ -434,3 +434,124 @@ header {
     display: block;
   }
 }
+.cart-icon {
+  position: relative;
+  font-size: 22px;
+  color: white;
+  text-decoration: none;
+  margin-left: 10px;
+}
+
+#cart-count {
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 13px;
+  position: absolute;
+  top: -8px;
+  right: -12px;
+}
+
+/* Positionne la cart-icon à droite */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+  .cart-icon {
+    font-size: 20px;
+    position: absolute;
+    top: 18px;
+    right: 15px;
+  }
+}
+/* HEADER GÉNÉRAL */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #111;
+  color: white;
+  padding: 15px 20px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 999;
+}
+
+/* MENU BURGER */
+.menu-icon {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: white;
+  margin-left: auto;
+}
+
+#menu-toggle {
+  display: none;
+}
+
+/* MENU LIENS */
+.nav-links ul {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+}
+
+/* PANIER */
+.cart-icon {
+  position: relative;
+  font-size: 22px;
+  color: white;
+  text-decoration: none;
+  margin-left: 20px;
+}
+
+#cart-count {
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 13px;
+  position: absolute;
+  top: -8px;
+  right: -12px;
+}
+
+/* RESPONSIVE MOBILE */
+@media (max-width: 768px) {
+  .menu-icon {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background-color: #111;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+  }
+
+  .nav-links ul {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  #menu-toggle:checked + .menu-icon + .nav-links {
+    display: block;
+  }
+}
