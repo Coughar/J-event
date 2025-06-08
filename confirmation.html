@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>J-event - Confirmation</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Confirmation - J-event</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- HEADER -->
   <header>
     <a href="index.html" class="logo">J-event</a>
-
     <nav>
       <ul>
         <li><a href="index.html">Accueil</a></li>
@@ -22,82 +20,63 @@
     </nav>
   </header>
 
-  <!-- MESSAGE DE CONFIRMATION -->
-  <main>
-  <section class="confirmation">
-    <h1>📝 Informations de livraison</h1>
-    <p>Veuillez remplir le formulaire ci-dessous pour finaliser votre commande.</p>
-
+  <main class="confirmation">
+    <h1>Validez votre commande</h1>
     <form id="livraison-form">
       <div class="form-group">
         <label for="nom">Nom complet :</label>
-        <input type="text" id="nom" name="nom" required>
+        <input type="text" id="nom" required>
       </div>
 
       <div class="form-group">
-        <label for="telephone">Numéro de téléphone :</label>
-        <input type="tel" id="telephone" name="telephone" required>
+        <label for="telephone">Téléphone :</label>
+        <input type="tel" id="telephone" required>
       </div>
 
       <div class="form-group">
-        <label for="adresse">Adresse de livraison :</label>
-        <textarea id="adresse" name="adresse" required></textarea>
+        <label for="adresse">Adresse :</label>
+        <textarea id="adresse" required></textarea>
       </div>
 
-      <button type="submit" class="btn">Envoyer la commande</button>
+      <button type="submit" class="btn">Envoyer la commande via WhatsApp</button>
     </form>
+  </main>
 
-    <div id="confirmation-message" style="display:none; margin-top:20px;">
-      ✅ Merci ! Votre commande a bien été transmise.
-    </div>
-  </section>
-</main>
-
-
-  <!-- FOOTER -->
   <footer>
     <p>&copy; 2025 J-event. Tous droits réservés.</p>
   </footer>
 
   <script>
-    // Optionnel : vider le panier après commande
-    localStorage.removeItem('panier');
+    const form = document.getElementById("livraison-form");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const nom = document.getElementById("nom").value;
+      const telephone = document.getElementById("telephone").value;
+      const adresse = document.getElementById("adresse").value;
+
+      const panier = JSON.parse(localStorage.getItem('panier')) || [];
+
+      let message = `Bonjour, je souhaite passer une commande via J-event :\n\n`;
+
+      if (panier.length === 0) {
+        message += `⚠️ Aucun produit sélectionné.\n`;
+      } else {
+        panier.forEach(item => {
+          message += `- ${item.nom} x${item.quantite} (${item.prix * item.quantite} FCFA)\n`;
+        });
+      }
+
+      message += `\n👤 Nom : ${nom}\n📞 Téléphone : ${telephone}\n📍 Adresse : ${adresse}`;
+
+      const numeroWhatsApp = "24162692782";
+      const lien = "https://wa.me/" + numeroWhatsApp + "?text=" + encodeURIComponent(message);
+
+      localStorage.removeItem('panier');
+      window.location.href = lien;
+    });
   </script>
-<script>
-  const form = document.getElementById("livraison-form");
-
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    const nom = document.getElementById("nom").value;
-    const telephone = document.getElementById("telephone").value;
-    const adresse = document.getElementById("adresse").value;
-
-    const panier = JSON.parse(localStorage.getItem('panier')) || [];
-
-    let message = `Bonjour, je souhaite passer une commande via J-event :\n\n`;
-
-    if (panier.length === 0) {
-      message += `⚠️ Aucun produit sélectionné.\n`;
-    } else {
-      panier.forEach(item => {
-        message += `- ${item.nom} x${item.quantite} (${item.prix * item.quantite} FCFA)\n`;
-      });
-    }
-
-    message += `\n👤 Nom : ${nom}\n📞 Téléphone : ${telephone}\n📍 Adresse : ${adresse}`;
-
-    // Numéro WhatsApp au format international sans "+"
-    const numeroWhatsApp = "24162692782";
-    const lien = "https://wa.me/" + numeroWhatsApp + "?text=" + encodeURIComponent(message);
-
-    localStorage.removeItem('panier');
-    window.location.href = lien;
-  });
-</script>
-
-
-<div id="notif" class="notif">✅ Produit ajouté au panier</div>
 
 </body>
 </html>
