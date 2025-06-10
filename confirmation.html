@@ -90,6 +90,10 @@
 
     localStorage.removeItem('panier');
     window.location.href = lien;
+    // Vide le panier après 3 secondes
+    setTimeout(() => {
+      localStorage.removeItem('panier');
+    }, 3000);
   });
 </script>
 
