@@ -92,3 +92,10 @@ function mettreAJourIconePanier() {
 
 if (document.readyState !== "loading") mettreAJourIconePanier();
 else document.addEventListener("DOMContentLoaded", mettreAJourIconePanier);
+function searchProducts() {
+  const query = document.getElementById("search-input").value.trim();
+  if (query !== "") {
+    window.location.href = "products.html?search=" + encodeURIComponent(query);
+  }
+  return false; // Empêche le rechargement
+}

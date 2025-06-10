@@ -23,10 +23,16 @@
       <li><a href="products.html">Événements</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
+
   </nav>
 
   <!-- PANIER FIXE À DROITE -->
-  <a href="cart.html" class="cart-icon">
+   <form class="search-form" onsubmit="return searchProducts()">
+  <input type="text" id="search-input" placeholder="Rechercher...">
+  <button type="submit">🔍</button>
+</form>
+
+   <a href="cart.html" class="cart-icon">
     🛒 <span id="cart-count">0</span>
   </a>
 </header>
@@ -40,42 +46,42 @@
     <div class="product-grid">
 
       <div class="product-card">
-        <img src="images/riz.jpg" alt="Riz parfumé">
+        <img src="images/RIZ.jpg" alt="Riz parfumé">
         <h3>Riz parfumé 5kg</h3>
         <p>5 000 FCFA</p>
         <button>Ajouter au panier</button>
       </div>
 
       <div class="product-card">
-        <img src="images/huile.jpg" alt="Huile végétale">
+        <img src="images/HUILE.webp" alt="Huile végétale">
         <h3>Huile végétale 1L</h3>
         <p>1 200 FCFA</p>
         <button>Ajouter au panier</button>
       </div>
 
       <div class="product-card">
-        <img src="images/savon.jpg" alt="Savon Omo">
+        <img src="images/SAVON OMO.jpeg" alt="Savon Omo">
         <h3>Savon Omo 1kg</h3>
         <p>1 000 FCFA</p>
         <button>Ajouter au panier</button>
       </div>
 
       <div class="product-card">
-        <img src="images/boisson.jpg" alt="Boisson Coca 1.5L">
+        <img src="images/coca.jpg" alt="Boisson Coca 1.5L">
         <h3>Boisson Coca 1.5L</h3>
         <p>800 FCFA</p>
         <button>Ajouter au panier</button>
       </div>
 
       <div class="product-card">
-        <img src="images/gobelets.jpg" alt="Gobelets jetables">
+        <img src="images/gobelets.webp" alt="Gobelets jetables">
         <h3>Gobelets jetables (pack de 50)</h3>
         <p>2 000 FCFA</p>
         <button>Ajouter au panier</button>
       </div>
 
       <div class="product-card">
-        <img src="images/chaises.jpg" alt="Location de chaises">
+        <img src="images/chaises.avif" alt="Location de chaises">
         <h3>Location de chaises (par jour)</h3>
         <p>500 FCFA</p>
         <button>Ajouter au panier</button>
